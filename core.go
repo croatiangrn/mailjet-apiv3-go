@@ -24,7 +24,7 @@ const (
 	LevelDebugFull        // Debug with body.
 )
 
-// User-Agent is formated as "UserAgentBase/UserAgentVersion;runtime.Version()".
+// User-Agent is formatted as "UserAgentBase/UserAgentVersion;runtime.Version()".
 const (
 	UserAgentBase    = "mailjet-api-v3-go"
 	UserAgentVersion = "3.0.0"
@@ -159,7 +159,7 @@ func buildURL(baseURL string, info *Request) string {
 		id := strconv.FormatInt(info.ID, 10)
 		tokens = append(tokens, id)
 	} else if info.AltID != "" {
-		tokens = append(tokens, string(info.AltID))
+		tokens = append(tokens, info.AltID)
 	}
 	if info.Action != "" {
 		tokens = append(tokens, info.Action)
@@ -223,10 +223,10 @@ func readJSONResult(r io.Reader, data interface{}) (int, int, error) {
 // for a request as long as StatusCode == 500.
 var NbAttempt = 5
 
-// doRequest is called to execute the request. Authentification is set
+// doRequest is called to execute the request. Authentication is set
 // with the public key and the secret key specified in MailjetClient.
 func (c *HTTPClient) doRequest(req *http.Request) (resp *http.Response, err error) {
-	debugRequest(req) //DEBUG
+	debugRequest(req) // DEBUG
 	req.SetBasicAuth(c.apiKeyPublic, c.apiKeyPrivate)
 	for attempt := 0; attempt < NbAttempt; attempt++ {
 		if resp != nil {
@@ -237,7 +237,7 @@ func (c *HTTPClient) doRequest(req *http.Request) (resp *http.Response, err erro
 			break
 		}
 	}
-	defer debugResponse(resp) //DEBUG
+	defer debugResponse(resp) // DEBUG
 	if err != nil {
 		return resp, fmt.Errorf("Error getting %s: %s", req.URL, err)
 	}
@@ -245,7 +245,7 @@ func (c *HTTPClient) doRequest(req *http.Request) (resp *http.Response, err erro
 	return resp, err
 }
 
-// checkResponseError returns response error if the statuscode is < 200 or >= 400.
+// checkResponseError returns response error if the status code is < 200 or >= 400.
 func checkResponseError(resp *http.Response) error {
 	if resp.StatusCode < 200 || resp.StatusCode >= 400 {
 		var mailjetErr RequestError
