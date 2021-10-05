@@ -18,8 +18,8 @@ import (
 	"strings"
 )
 
-// NewMailjetClient returns a new MailjetClient using an public apikey
-// and an secret apikey to be used when authenticating to API.
+// NewMailjetClient returns a new MailjetClient using a public apikey
+// and a secret apikey to be used when authenticating to API.
 func NewMailjetClient(apiKeyPublic, apiKeyPrivate string, baseURL ...string) *Client {
 	httpClient := NewHTTPClient(apiKeyPublic, apiKeyPrivate)
 	smtpClient := NewSMTPClient(apiKeyPublic, apiKeyPrivate)

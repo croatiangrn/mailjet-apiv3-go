@@ -6,7 +6,7 @@ import (
 	"errors"
 	"reflect"
 
-	"github.com/mailjet/mailjet-apiv3-go/v3/resources"
+	"github.com/croatiangrn/mailjet-apiv3-go/resources"
 )
 
 // Fixtures definition
